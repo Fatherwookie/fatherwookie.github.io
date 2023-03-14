@@ -1,5 +1,5 @@
 const numberOfPosts = 20;
-const subredditName = ArchitecturePorn
+const subredditName = 'ArchitecturePorn';
 
 async function getTopImages() {
   const response = await fetch(`https://www.reddit.com/r/${subredditName}/top.json?sort=top&t=day&limit=${numberOfPosts}`);

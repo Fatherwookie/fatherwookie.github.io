@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Display Images</title>
+  </head>
+  <body>
+    <h1>Top Images from /r/ArchitecturePorn</h1>
+    <div id="image-container"></div>
+    <script type="text/javascript" src="archgrabber.js"></script>
+
+      // Create an img element for each image and add it to the page
+      var container = document.getElementById("image-container");
+      for (var i = 0; i < images.length; i++) {
+        var img = document.createElement("img");
+        img.src = images[i];
+        container.appendChild(img);
+      }
+    </script>
+  </body>
+</html>

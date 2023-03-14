@@ -50,14 +50,4 @@ function displayImages(images) {
     resizeImage();
   }
 
-  img.onload = () => {
-    resizeImage();
-    setInterval(() => {
-      showNextImage();
-    }, 3000);
-  }
-  
-  img.src = images[index];
-}
-
 getTopImages();

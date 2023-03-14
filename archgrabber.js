@@ -1,10 +1,8 @@
 function displayImages(images) {
   let index = 0;
   const container = document.getElementById('image-container');
-  const img = document.createElement('img');
-  container.appendChild(img);
 
-  function resizeImage() {
+  function resizeImage(img) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const maxWidth = windowWidth - 50; // Allow some padding
@@ -26,10 +24,19 @@ function displayImages(images) {
       img.width = width;
       img.height = height;
     }
-    image.src = images[index];
+    image.src = img.src;
   }
 
   function showNextImage() {
+    const img = document.createElement('img');
+    container.innerHTML = '';
+    container.appendChild(img);
+    img.onload = () => {
+      resizeImage(img);
+      setInterval(() => {
+        showNextImage();
+      }, 3000);
+    }
     index++;
     if (index >= images.length) {
       index = 0;
@@ -37,13 +44,5 @@ function displayImages(images) {
     img.src = images[index];
   }
 
-  img.onload = () => {
-    resizeImage();
-    setInterval(() => {
-      showNextImage();
-      resizeImage();
-    }, 3000);
-  }
-  
-  img.src = images[index];
+  showNextImage();
 }

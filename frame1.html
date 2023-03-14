@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Display Images</title>
+    <title>Top 20 Images from /r/ArchitecturePorn</title>
   </head>
   <body>
-    <h1>Top Images from /r/ArchitecturePorn</h1>
+    <h1>Top 20 Images from /r/ArchitecturePorn</h1>
     <div id="image-container"></div>
-    <script type="text/javascript" src="archgrabber.js">
-
-      
-      var container = document.getElementById("image-container");
-      for (var i = 0; i < images.length; i++) {
-        var img = document.createElement("img");
-        img.src = images[i];
-        container.appendChild(img);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

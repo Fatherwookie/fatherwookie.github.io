@@ -35,13 +35,13 @@ function displayImages(images) {
       index = 0;
     }
     img.src = images[index];
-    resizeImage();
   }
 
   img.onload = () => {
     resizeImage();
     setInterval(() => {
       showNextImage();
+      resizeImage();
     }, 3000);
   }
   

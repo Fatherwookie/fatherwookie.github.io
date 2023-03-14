@@ -1,18 +1,28 @@
+const subredditName = 'ArchitecturePorn';
+const numberOfPosts = 20;
+
+async function getTopImages() {
+  const response = await fetch(`https://www.reddit.com/r/${subredditName}/top.json?sort=top&t=day&limit=${numberOfPosts}`);
+  const json = await response.json();
+  const children = json.data.children;
+  const images = children.filter(child => child.data.post_hint === 'image').map(child => child.data.url);
+
+  displayImages(images);
+}
+
 function displayImages(images) {
   let index = 0;
   const container = document.getElementById('image-container');
-  const img = document.createElement('img');
-  container.appendChild(img);
 
-  function resizeImage() {
+  function resizeImage(img, image) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const maxWidth = windowWidth - 50; // Allow some padding
     const maxHeight = windowHeight - 50;
-    const image = new Image();
-    image.onload = () => {
-      let width = image.width;
-      let height = image.height;
+    const newImg = new Image();
+    newImg.onload = () => {
+      let width = newImg.width;
+      let height = newImg.height;
       if (width > maxWidth) {
         const ratio = maxWidth / width;
         width *= ratio;
@@ -25,8 +35,9 @@ function displayImages(images) {
       }
       img.width = width;
       img.height = height;
+      img.src = image;
     }
-    image.src = images[index];
+    newImg.src = image;
   }
 
   function showNextImage() {
@@ -34,16 +45,16 @@ function displayImages(images) {
     if (index >= images.length) {
       index = 0;
     }
-    img.src = images[index];
-    resizeImage();
+    const img = document.createElement('img');
+    container.innerHTML = '';
+    container.appendChild(img);
+    resizeImage(img, images[index]);
   }
 
-  img.onload = () => {
-    resizeImage();
-    setInterval(() => {
-      showNextImage();
-    }, 3000);
-  }
-  
-  img.src = images[index];
+  showNextImage();
+  setInterval(() => {
+    showNextImage();
+  }, 3000);
 }
+
+getTopImages();

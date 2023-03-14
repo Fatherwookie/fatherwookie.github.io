@@ -1,5 +1,5 @@
 const subredditName = 'ArchitecturePorn';
-const numberOfPosts = 10;
+const numberOfPosts = 20;
 
 async function getTopImages() {
   const response = await fetch(`https://www.reddit.com/r/${subredditName}/top.json?sort=top&t=day&limit=${numberOfPosts}`);
@@ -11,13 +11,19 @@ async function getTopImages() {
 }
 
 function displayImages(images) {
+  let index = 0;
   const container = document.getElementById('image-container');
+  const img = document.createElement('img');
+  img.src = images[index];
+  container.appendChild(img);
 
-  images.forEach(image => {
-    const img = document.createElement('img');
-    img.src = image;
-    container.appendChild(img);
-  });
+  setInterval(() => {
+    index++;
+    if (index >= images.length) {
+      index = 0;
+    }
+    img.src = images[index];
+  }, 3000);
 }
 
 getTopImages();

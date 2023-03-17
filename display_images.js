@@ -1,5 +1,3 @@
-OLD and somewhat working
-
 // display_images.js
 
 // Setting your AWS credentials
